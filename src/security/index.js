@@ -1,0 +1,1 @@
+export {myhash,myCompare} from "./hash.js"

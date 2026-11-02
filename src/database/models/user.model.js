@@ -31,6 +31,11 @@ let userSchema = new mongoose.Schema(
       enum: Object.values(genderEnum),
       default: genderEnum.male,
     },
+    age: {
+      type: Number,
+      min: [18, "Age must be bigger than 18 "],
+      max: [60, "Age must be smaller than 60 "],
+    },
   },
   {
     timestamps: true,

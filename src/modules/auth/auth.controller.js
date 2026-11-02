@@ -7,9 +7,9 @@ authController.post("/signup", async (req, res) => {
   let result = await authservice.signUp(req.body);
   response({
     res,
-    status: 200,
-    data: req.body,
-    message: result,
+    status: 201,
+    data: result,
+    message: "User created successfuly",
   });
 });
 authController.post("/login", async (req, res) => {

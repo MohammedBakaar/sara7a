@@ -1,0 +1,2 @@
+export { globalErrorHandler } from "./globalErrorHandler.js";
+

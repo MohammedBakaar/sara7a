@@ -36,6 +36,9 @@ let userSchema = new mongoose.Schema(
       min: [18, "Age must be bigger than 18 "],
       max: [60, "Age must be smaller than 60 "],
     },
+    phone: {
+      type: String,
+    }
   },
   {
     timestamps: true,

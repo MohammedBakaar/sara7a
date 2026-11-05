@@ -6,6 +6,7 @@ import { authController } from "./modules/index.js";
 
 await connectDB();
 
+console.log();
 const app = express();
 
 app.use(express.json());
@@ -20,5 +21,5 @@ app.use("/auth", authController);
 
 app.use(globalErrorHandler);
 app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
+  console.log(`server is running on port :: ${port}`);
 });

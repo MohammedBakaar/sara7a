@@ -9,7 +9,7 @@ authController.post("/signup", async (req, res) => {
     res,
     status: 201,
     data: result,
-    message: "User created successfuly",
+    message: "User created successfully",
   });
 });
 authController.post("/login", async (req, res) => {
@@ -18,6 +18,6 @@ authController.post("/login", async (req, res) => {
     res,
     status: 200,
     data: result,
-    message: "you loged in successfully",
+    message: "you logged in successfully",
   });
 });

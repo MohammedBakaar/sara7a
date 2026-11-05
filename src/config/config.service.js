@@ -10,3 +10,8 @@ config(
 export const port = Number(process.env.PORT)
 export const mongo_uri = process.env.MONGO_URI
 export const salt = Number(process.env.SALT)
+export const ENC = {
+    key: process.env.ENC_KEY,
+    ivLength: Number(process.env.ENC_IV_LENGTH),
+    algorithm : process.env.ENC_ALGO
+}

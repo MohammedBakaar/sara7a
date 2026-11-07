@@ -1,4 +1,4 @@
-import { ENC } from "../config/config.service.js";
+import { ENC } from "../../config/config.service.js";
 import { randomBytes, createCipheriv, createDecipheriv } from "node:crypto";
 let key = Buffer.from(ENC.key, "hex");
 

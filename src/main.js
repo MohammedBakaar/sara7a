@@ -2,7 +2,7 @@ import express from "express";
 import { port } from "./config/config.service.js";
 import { connectDB } from "./database/index.js";
 import { globalErrorHandler } from "./common/index.js";
-import { authController } from "./modules/index.js";
+import { authController, userController } from "./modules/index.js";
 
 await connectDB();
 
@@ -18,6 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use("/auth", authController);
+app.use("/user", userController);
 
 app.use(globalErrorHandler);
 app.listen(port, () => {

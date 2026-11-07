@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { response } from "../../common/index.js";
+import { auth, response, tokenTypeEnum , authentication} from "../../common/index.js";
 import * as authservice from "./auth.service.js";
 export const authController = Router();
 
@@ -12,6 +12,7 @@ authController.post("/signup", async (req, res) => {
     message: "User created successfully",
   });
 });
+
 authController.post("/login", async (req, res) => {
   let result = await authservice.login(req.body);
   response({
@@ -21,3 +22,14 @@ authController.post("/login", async (req, res) => {
     message: "you logged in successfully",
   });
 });
+authController.get("/rotate-token", auth({ tokenType: tokenTypeEnum.refresh }), (req, res) => {
+    let payload = req.payload
+    let result =  authservice.rotateToken(req.user , payload);
+    response({
+      res,
+      status: 200,
+      data: result,
+      message: "new access token returned",
+    });
+  })
+

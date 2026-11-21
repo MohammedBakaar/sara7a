@@ -3,13 +3,13 @@ import { port } from "./config/config.service.js";
 import { connectDB } from "./database/index.js";
 import { globalErrorHandler } from "./common/index.js";
 import { authController, userController } from "./modules/index.js";
-
+import cors from "cors"
 await connectDB();
 
 console.log();
 const app = express();
 
-app.use(express.json());
+app.use(cors() ,express.json());
 app.use((req, res, next) => {
   console.log({
     method: req.method,

@@ -1,2 +1,2 @@
 export { connectDB } from "./connection.js";
-export {userModel }from "./models/user.model.js"
+export {userRepo} from "./repo/user.repo.js"

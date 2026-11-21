@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { auth, response, tokenTypeEnum , authentication} from "../../common/index.js";
+import { auth, response, tokenTypeEnum , authentication , validation} from "../../common/index.js";
 import * as authservice from "./auth.service.js";
+import { loginSchema, signUpSchema } from "./auth.validation.js";
 export const authController = Router();
 
-authController.post("/signup", async (req, res) => {
-  let result = await authservice.signUp(req.body);
+authController.post("/signup",validation(signUpSchema), async (req, res) => {
+  let result = await authservice.signUp(req.validate);
   response({
     res,
     status: 201,
@@ -13,13 +14,24 @@ authController.post("/signup", async (req, res) => {
   });
 });
 
-authController.post("/login", async (req, res) => {
-  let result = await authservice.login(req.body);
+authController.post("/login",validation(loginSchema) ,async (req, res) => {
+  let result = await authservice.login(req.validate);
   response({
     res,
     status: 200,
     data: result,
     message: "you logged in successfully",
+  });
+});
+authController.post("/loginWithGmail", async (req, res) => {
+  let {tokens , status} = await authservice.loginWithGmail(req.body);
+  response({
+    res,
+    status,
+    data: tokens,
+    message: status == 200 
+      ? "you logged in successfully"
+      : "User created successfully",
   });
 });
 authController.get("/rotate-token", auth({ tokenType: tokenTypeEnum.refresh }), (req, res) => {

@@ -1,3 +1,5 @@
+import generalFields from "./utils/generalFields.js";
+
 export {
   globalErrorHandler,
   authentication,
@@ -12,3 +14,4 @@ export {
   roleEnum,
   providerEnum,
 } from "./enums/index.js";
+export { generalFields} from "./utils/index.js"

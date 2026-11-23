@@ -5,7 +5,7 @@ import { loginSchema, signUpSchema } from "./auth.validation.js";
 export const authController = Router();
 
 authController.post("/signup",validation(signUpSchema), async (req, res) => {
-  let result = await authservice.signUp(req.validate);
+  let result = await authservice.signUp(req.validate.body);
   response({
     res,
     status: 201,
@@ -15,7 +15,7 @@ authController.post("/signup",validation(signUpSchema), async (req, res) => {
 });
 
 authController.post("/login",validation(loginSchema) ,async (req, res) => {
-  let result = await authservice.login(req.validate);
+  let result = await authservice.login(req.validate.body);
   response({
     res,
     status: 200,

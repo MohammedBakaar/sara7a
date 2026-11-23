@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { auth, authentication, response, roleEnum, tokenTypeEnum } from "../../common/index.js";
+import { auth, authentication, response, roleEnum, tokenTypeEnum, validation } from "../../common/index.js";
 import * as userService from "./user.service.js";
+import { userProfileSchema } from "./user.validate.js";
+
 export const userController = Router();
 
 userController.get("/profile",auth({tokenType : tokenTypeEnum.access}),authentication(roleEnum.user), async (req, res) => {
@@ -11,6 +13,16 @@ userController.get("/profile",auth({tokenType : tokenTypeEnum.access}),authentic
     message: "Profile fetched successfully",
   });
 });
+
+userController.get("/user-profile/:userId",validation(userProfileSchema), async(req,res) => {
+  let user = await userService.getUserProfile(req.validate.params.userId)
+  response({
+    res,
+    status: 200,
+    data: user,
+    message: "Profile fetched successfully",
+  });
+})
 userController.get("/admin-profile",auth({tokenType : tokenTypeEnum.access}),authentication(roleEnum.admin), async (req, res) => {
   response({
     res,

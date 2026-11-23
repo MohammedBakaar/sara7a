@@ -1,13 +1,20 @@
 import z from "zod";
+import { generalFields } from "../../common/index.js";
 
-export const loginSchema = z.strictObject({
-  email: z.email(),
-  password: z.string().minLength(8),
-});
 
-export const signUpSchema = loginSchema.extend({
-    firstName : z.string().minLength(5),
-    lasttName: z.string().minLength(5),
-    phone: z.e164(),
-    gender : z.number().min(0).max(1)
+export const loginSchema = (lang = 1) =>
+  z.object({
+    body: z.strictObject({
+      email: generalFields(lang).email,
+      password: generalFields(lang).password,
+    }),
+  });
+
+export const signUpSchema = (lang)=>z.object({
+  body: loginSchema().shape.body.safeExtend({
+    firstName: generalFields(lang).firstName,
+    lastName: generalFields(lang).lastName,
+    phone: generalFields(lang).phone,
+    gender: generalFields(lang).gender,
+  }),
 });

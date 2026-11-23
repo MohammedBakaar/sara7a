@@ -22,17 +22,18 @@ let userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    password: {
-      type: String,
-      required: function (value) {
-        return value.provider == providerEnum.system;
-      },
-    },
     provider: {
       type: Number,
       enum: Object.values(providerEnum),
       default: providerEnum.system,
     },
+    password: {
+      type: String,
+      required: function () {
+        return this.provider == providerEnum.system;
+      },
+    },
+    
     gender: {
       type: Number,
       enum: Object.values(genderEnum),
